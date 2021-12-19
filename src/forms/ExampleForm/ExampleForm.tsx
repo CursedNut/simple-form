@@ -1,9 +1,9 @@
-import type { FormEventHandler } from "react";
+import { FormEventHandler, useCallback } from 'react';
 
 import { SimpleForm, useFormWithMaskedValues } from 'components/SimpleForm';
-import { Field } from "components/Field";
+import { Field } from 'components/Field';
 
-import { DEFAULT_VALUES, validation, masks } from "./ExampleForm.config";
+import { DEFAULT_VALUES, validation, masks } from './ExampleForm.config';
 
 const ExampleForm = () => {
   const {
@@ -14,21 +14,21 @@ const ExampleForm = () => {
     onSubmit
   } = useFormWithMaskedValues({ initialValues: DEFAULT_VALUES }, masks);
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
-    onSubmit(e);
+  const handleSubmit: FormEventHandler<HTMLFormElement> = useCallback(
+    event => {
+      onSubmit(event);
 
-    Object.entries(values).forEach(([name, value]) => {
-      const validate = validation[name];
+      Object.entries(values).forEach(([name, value]) => {
+        const validate = validation[name];
 
-      onValidate(name, value, validate)
-    })
-  };
+        onValidate(name, value, validate)
+      })
+    }, [values, onSubmit, onValidate]);
 
   return (
     <SimpleForm onSubmit={handleSubmit}>
       <Field
         label="Имя"
-        id="name"
         name="name"
         value={values.name}
         onChange={onChange}
@@ -37,7 +37,6 @@ const ExampleForm = () => {
 
       <Field
         label="Телефон"
-        id="phone"
         name="phone"
         value={values.phone}
         onChange={onChange}
@@ -46,7 +45,6 @@ const ExampleForm = () => {
 
       <Field
         label="Email"
-        id="email"
         name="email"
         value={values.email}
         onChange={onChange}
@@ -55,7 +53,6 @@ const ExampleForm = () => {
 
       <Field
         label="Дата"
-        id="date"
         name="date"
         type="date"
         value={values.date}

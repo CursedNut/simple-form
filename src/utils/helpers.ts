@@ -4,8 +4,8 @@ const LATIN_AND_SYMBOLS_ONLY = 'только латиница и спецсим�
 export const getPhoneMasked = (value: string) => {
   const mask = '+7(___) ___-__-__';
 
-  const def = mask.replace(/\D/g, "");
-  const val = value.replace(/\D/g, "");
+  const def = mask.replace(/\D/g, '');
+  const val = value.replace(/\D/g, '');
 
   let i = 0;
 
@@ -24,7 +24,7 @@ export const getPhoneMasked = (value: string) => {
     }
   );
 
-  i = newValue.indexOf("_");
+  i = newValue.indexOf('_');
 
   if (i !== -1) {
     newValue = newValue.slice(0, i);
@@ -32,10 +32,10 @@ export const getPhoneMasked = (value: string) => {
 
   let reg: string | RegExp = mask
     .slice(0, value.length)
-    .replace(/_+/g, (a) => "\\d{1," + a.length + "}")
-    .replace(/[+()]/g, "\\$&");
+    .replace(/_+/g, (a) => '\\d{1,' + a.length + '}')
+    .replace(/[+()]/g, '\\$&');
 
-  reg = new RegExp("^" + reg + "$");
+  reg = new RegExp('^' + reg + '$');
 
   return {
     value: !reg.test(value) || value.length < 5 ? newValue : value,

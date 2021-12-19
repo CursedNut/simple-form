@@ -1,10 +1,9 @@
-import { ChangeEventHandler, FormEventHandler, useCallback } from "react";
-import { useState } from "react";
+import { ChangeEventHandler, FormEventHandler, useCallback, useState } from 'react';
 
-export type Values = Record<string, string>;
-export type Errors = Record<string, string>;
+type Values = Record<string, string>;
+type Errors = Record<string, string>;
 
-export interface UseFormDeps {
+interface UseFormDeps {
   initialValues?: Values 
 }
 
@@ -28,7 +27,7 @@ export const useForm = (deps: UseFormDeps) => {
   ): void => {
     const error = validate ? validate(value) : undefined;
 
-    if (error !== undefined) {
+    if (typeof error !== 'undefined') {
       setErrors(prevErrors => ({ ...prevErrors, [name]: error }))
     }
   }, [setErrors]);

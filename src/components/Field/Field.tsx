@@ -1,9 +1,8 @@
-import { ChangeEventHandler, FunctionComponent } from "react";
+import { ChangeEventHandler, FunctionComponent } from 'react';
 
 import './Field.css';
 
 interface FieldProps {
-  id: string,
   name: string,
   type?: HTMLInputElement['type'],
   value: HTMLInputElement['value'],
@@ -14,7 +13,6 @@ interface FieldProps {
 
 const Field: FunctionComponent<FieldProps> = props => {
   const {
-    id,
     name,
     type = 'text',
     value,
@@ -25,10 +23,10 @@ const Field: FunctionComponent<FieldProps> = props => {
 
   return (
     <div className="field">
-      <label className="field__label" htmlFor={id}>{label}</label>
+      <label className="field__label" htmlFor={name}>{label}</label>
       <input
         className="field__input"
-        id={id}
+        id={name}
         name={name}
         type={type}
         value={value}

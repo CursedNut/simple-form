@@ -1,5 +1,4 @@
-import type { FormEventHandler, ReactElement } from "react";
-import type { FunctionComponent } from "react";
+import type { FunctionComponent, FormEventHandler, ReactElement } from 'react';
 
 import './SimpleForm.css';
 
@@ -8,7 +7,7 @@ interface SimpleFormProps {
   children: ReactElement | ReactElement[]
 }
 
-const SimpleForm: FunctionComponent<SimpleFormProps> = (props) => {
+const SimpleForm: FunctionComponent<SimpleFormProps> = props => {
   const { onSubmit, children } = props;
 
   return (

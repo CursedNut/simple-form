@@ -1,6 +1,7 @@
-import { useForm, UseFormDeps } from "./useForm";
+import { useForm } from './useForm';
 
-export type GetMask = (value: string) => ({
+type UseFormDeps = Parameters<typeof useForm>[0]
+type GetMask = (value: string) => ({
   value: string,
   error: string
 })

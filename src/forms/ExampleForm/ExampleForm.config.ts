@@ -1,9 +1,11 @@
-import { GetMask } from "components/SimpleForm/hooks/useFormWithMaskedValues";
-import { getEmailMasked, getNameMasked, getPhoneMasked } from "utils/helpers";
+import { useFormWithMaskedValues } from 'components/SimpleForm';
+import { getEmailMasked, getNameMasked, getPhoneMasked } from 'utils/helpers';
 
 const SHOULD_NOT_EMPTY = 'заполните поле';
 const NOT_EMAIL = 'некорректный email';
-const INCORRECT_PHONE = 'некорректный номер теефона';
+const INCORRECT_PHONE = 'некорректный номер телефона';
+const TOO_EARLY = 'введите дату не ранее 01.01.2010';
+const TOO_LATE = 'введите дату не позднее сегодня';
 
 interface Validation {
   [key: string]: (value: string) => string
@@ -38,7 +40,7 @@ export const validation: Validation = {
 
     return ''
   },
-  
+
   date: value => {
     const minDate = new Date('01.01.2010');
     const maxDate = new Date();
@@ -48,18 +50,20 @@ export const validation: Validation = {
     }
 
     if (new Date(value) < minDate) {
-      return 'слишком ранняя дата'
+      return TOO_EARLY
     }
 
     if (new Date(value) > maxDate) {
-      return 'эта дата ещё не настала'
+      return TOO_LATE
     }
 
     return ''
   },
 };
 
-export const masks: Record<string, GetMask> = {
+type Masks = Parameters<(typeof useFormWithMaskedValues)>[1];
+
+export const masks: Masks = {
   name: getNameMasked,
   phone: getPhoneMasked,
   email: getEmailMasked,
