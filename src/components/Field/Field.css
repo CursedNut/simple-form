@@ -1,0 +1,19 @@
+.field-container {
+  margin-bottom: 10px;
+}
+
+.field__label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.field__input {
+  padding: 5px;
+  width: 100%;
+}
+
+.field__error {
+  height: 20px; 
+  font-size: 14px; 
+  color: rgb(183 65 65);
+}
